@@ -13,10 +13,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3  # Обновлено на v3
 
       - name: Set up JDK 11
-        uses: actions/setup-java@v2
+        uses: actions/setup-java@v3  # Обновлено на v3
         with:
           java-version: '11'
           distribution: 'temurin'
@@ -32,11 +32,11 @@ jobs:
           mvn -Dtest=lessons.lesson1.MainTest test
 
       - name: Check Lesson 1 Result - Passed
-        if: steps.lesson1.outcome == 'success'
+        if: success() && steps.lesson1.outcome == 'success'
         run: echo "Lesson 1 tests passed"
 
       - name: Check Lesson 1 Result - Failed
-        if: steps.lesson1.outcome == 'failure'
+        if: failure() && steps.lesson1.outcome == 'failure'
         run: echo "Lesson 1 tests failed"
 
       # Проверка урока 2
@@ -47,9 +47,9 @@ jobs:
           mvn -Dtest=lessons.lesson2.MainTest test
 
       - name: Check Lesson 2 Result - Passed
-        if: steps.lesson2.outcome == 'success'
+        if: success() && steps.lesson2.outcome == 'success'
         run: echo "Lesson 2 tests passed"
 
       - name: Check Lesson 2 Result - Failed
-        if: steps.lesson2.outcome == 'failure'
+        if: failure() && steps.lesson2.outcome == 'failure'
         run: echo "Lesson 2 tests failed"
