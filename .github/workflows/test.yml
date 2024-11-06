@@ -1,4 +1,4 @@
-name: Java CI
+name: Result test lessons
 
 on:
   push:
