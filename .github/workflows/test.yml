@@ -31,13 +31,13 @@ jobs:
         run: |
           echo "Запуск тестов для Урока 1"
           mvn -Dtest=lessons.lesson1.MainTest test
+
       - name: Урок 1 - Результат
-        run: |
-          if [ "${{ steps.lesson1.outcome }}" == "success" ]; then
-            echo "Урок 1 пройден"
-          else
-            echo "Урок 1 не пройден"
-          fi
+        if: ${{ steps.lesson1.outcome == 'success' }}
+        run: echo "Урок 1 пройден"
+      - name: Урок 1 - Результат (Не пройден)
+        if: ${{ steps.lesson1.outcome == 'failure' }}
+        run: echo "Урок 1 не пройден"
 
       # Проверка урока 2
       - name: Run tests for Lesson 2
@@ -46,10 +46,10 @@ jobs:
         run: |
           echo "Запуск тестов для Урока 2"
           mvn -Dtest=lessons.lesson2.MainTest test
+
       - name: Урок 2 - Результат
-        run: |
-          if [ "${{ steps.lesson2.outcome }}" == "success" ]; then
-            echo "Урок 2 пройден"
-          else
-            echo "Урок 2 не пройден"
-          fi
+        if: ${{ steps.lesson2.outcome == 'success' }}
+        run: echo "Урок 2 пройден"
+      - name: Урок 2 - Результат (Не пройден)
+        if: ${{ steps.lesson2.outcome == 'failure' }}
+        run: echo "Урок 2 не пройден"
