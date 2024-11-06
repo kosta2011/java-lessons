@@ -26,26 +26,30 @@ jobs:
 
       # Проверка урока 1
       - name: Run tests for Lesson 1
+        id: lesson1
         run: |
           echo "Starting tests for Lesson 1"
           mvn -Dtest=lessons.lesson1.MainTest test
-        continue-on-error: true
 
-      - name: Check Lesson 1 Result
-        if: failure()
-        run: echo "Lesson 1 tests failed"
-        if: success()
+      - name: Check Lesson 1 Result - Passed
+        if: steps.lesson1.outcome == 'success'
         run: echo "Lesson 1 tests passed"
+
+      - name: Check Lesson 1 Result - Failed
+        if: steps.lesson1.outcome == 'failure'
+        run: echo "Lesson 1 tests failed"
 
       # Проверка урока 2
       - name: Run tests for Lesson 2
+        id: lesson2
         run: |
           echo "Starting tests for Lesson 2"
           mvn -Dtest=lessons.lesson2.MainTest test
-        continue-on-error: true
 
-      - name: Check Lesson 2 Result
-        if: failure()
-        run: echo "Lesson 2 tests failed"
-        if: success()
+      - name: Check Lesson 2 Result - Passed
+        if: steps.lesson2.outcome == 'success'
         run: echo "Lesson 2 tests passed"
+
+      - name: Check Lesson 2 Result - Failed
+        if: steps.lesson2.outcome == 'failure'
+        run: echo "Lesson 2 tests failed"
