@@ -1,3 +1,13 @@
+name: Java CI
+
+on:
+  push:
+    branches:
+      - master  # Укажите ветку, на которую нужно реагировать, например, master
+  pull_request:
+    branches:
+      - master  # Укажите ветку, на которую нужно реагировать, например, master
+
 jobs:
   build:
     runs-on: ubuntu-latest
